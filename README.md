@@ -1,0 +1,3 @@
+Profesor, en mi proyecto implementé llaves foráneas para mantener la integridad de la base de datos. Por eso, si intenta eliminar un usuario que todavía tiene equipos asociados, SQL Server no lo permite.
+Esto evita que queden registros huérfanos o inconsistentes. En ese caso, primero debo eliminar los registros relacionados, como los equipos, reparaciones, asignaciones, y después ya puedo eliminar el usuario. 
+Además realice el CRUD en todas las tabasl debido a que la instrucción dice en todas las tablas y luegoo especifica 3 de ellas, pero decidi hacerlo asi por si acaso ya que no entendi muy bien esa parte.
