@@ -1,0 +1,151 @@
+﻿CREATE DATABASE ReparacionesEquipos;
+GO
+
+USE ReparacionesEquipos;
+GO
+
+
+CREATE TABLE Usuario
+(
+	UsuarioID INT IDENTITY(100,1) NOT NULL,
+
+	Nombre VARCHAR(50) NOT NULL,
+
+	CorreoElectronico VARCHAR(100),
+
+	Telefono VARCHAR(20),
+
+PRIMARY KEY CLUSTERED
+(
+	UsuarioID ASC
+)
+);
+GO
+
+
+
+CREATE TABLE Equipo
+(
+	EquipoID INT IDENTITY(100,1) NOT NULL,
+
+	TipoEquipo VARCHAR(50) NOT NULL,
+
+	Modelo VARCHAR(50) NOT NULL,
+
+	UsuarioID INT,
+
+PRIMARY KEY CLUSTERED
+(
+	EquipoID ASC
+)
+);
+GO
+
+
+CREATE TABLE Tecnico
+(
+	TecnicoID INT IDENTITY(100,1) NOT NULL,
+
+	Nombre VARCHAR(50) NOT NULL,
+
+	Especialidad VARCHAR(50),
+
+PRIMARY KEY CLUSTERED
+(
+	TecnicoID ASC
+)
+);
+GO
+
+
+CREATE TABLE Reparacion
+(
+	ReparacionID INT IDENTITY(100,1) NOT NULL,
+
+	EquipoID INT,
+
+	FechaSolicitud DATETIME,
+
+	Estado VARCHAR(50),
+
+PRIMARY KEY CLUSTERED
+(
+	ReparacionID ASC
+)
+);
+GO
+
+
+CREATE TABLE Asignacion
+(
+	AsignacionID INT IDENTITY(100,1) NOT NULL,
+
+	ReparacionID INT,
+
+	TecnicoID INT,
+
+	FechaAsignacion DATETIME,
+
+PRIMARY KEY CLUSTERED
+(
+	AsignacionID ASC
+)
+);
+GO
+
+
+
+CREATE TABLE DetalleReparacion
+(
+	DetalleID INT IDENTITY(100,1) NOT NULL,
+
+	ReparacionID INT,
+
+	Descripcion VARCHAR(250),
+
+	FechaInicio DATETIME,
+
+	FechaFin DATETIME,
+
+PRIMARY KEY CLUSTERED
+(
+	DetalleID ASC
+)
+);
+GO
+
+
+
+ALTER TABLE Equipo
+ADD CONSTRAINT FK_USUARIO
+FOREIGN KEY (UsuarioID)
+REFERENCES Usuario(UsuarioID);
+GO
+
+
+ALTER TABLE Reparacion
+ADD CONSTRAINT FK_EQUIPO
+FOREIGN KEY (EquipoID)
+REFERENCES Equipo(EquipoID);
+GO
+
+
+ALTER TABLE Asignacion
+ADD CONSTRAINT FK_REPARACION
+FOREIGN KEY (ReparacionID)
+REFERENCES Reparacion(ReparacionID);
+GO
+
+
+ALTER TABLE Asignacion
+ADD CONSTRAINT FK_TECNICO
+FOREIGN KEY (TecnicoID)
+REFERENCES Tecnico(TecnicoID);
+GO
+
+
+ALTER TABLE DetalleReparacion
+ADD CONSTRAINT FK_DETALLE_REPARACION
+FOREIGN KEY (ReparacionID)
+REFERENCES Reparacion(ReparacionID);
+GOSELECT * FROM Usuario;
